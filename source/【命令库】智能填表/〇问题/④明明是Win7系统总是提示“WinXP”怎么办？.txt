@@ -1,0 +1,13 @@
+//记得要先初始化命令库，才能用命令库中的功能
+If LibE.神梦_智能填表._初始化(授权码, "") = False  Then 
+    MsgBox "出错，智能填表初始化失败！", 1 + 16 + 4096, "警告！"
+    ExitScript 
+End If
+
+//在初始化命令后面，绑定命令前面加上这句代码：
+DimEnv_IsXP = False
+
+//启动谷歌浏览器
+If LibE.神梦_智能填表.绑定("Chrome.exe") Then 
+    MsgBox "绑定谷歌浏览器成功！", 1 + 16 + 4096, "警告！"
+End If

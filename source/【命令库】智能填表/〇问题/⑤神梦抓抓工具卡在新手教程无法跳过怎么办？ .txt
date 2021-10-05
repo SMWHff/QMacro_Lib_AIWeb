@@ -1,0 +1,3 @@
+//执行以下代码强制跳过新手教程：
+Call Plugin.File.CreateFolder("C:\神梦辅助\")
+Call Plugin.File.WriteINI("神梦抓抓工具", "Web教程步骤", 4, "C:\神梦辅助\Config.ini")

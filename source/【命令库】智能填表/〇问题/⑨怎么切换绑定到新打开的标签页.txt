@@ -1,0 +1,44 @@
+授权码 = "0123456789ABCDEF"  '填入授权码
+
+//记得要先初始化命令库，才能用命令库中的功能
+If LibE.神梦_智能填表._初始化(授权码, "") = False  Then 
+    MsgBox "出错，智能填表初始化失败！", 1 + 16 + 4096, "警告！"
+    ExitScript 
+End If
+
+
+//启动谷歌浏览器
+If LibE.神梦_智能填表.绑定("Chrome.exe") Then 
+    
+    '打开百度网址
+    Call LibE.神梦_智能填表.网页_跳转("https://www.baidu.com/")
+    Delay 2000
+    
+    '输入“按键精灵”
+    Call LibE.神梦_智能填表.元素_置输入框("神梦无痕", "id:kw") 
+    Delay 2000
+    
+    '点击百度一下
+    Call LibE.神梦_智能填表.元素_点击("id:su")
+    Delay 3500
+
+    '点击第一条搜索结果
+    Call LibE.神梦_智能填表.元素_点击("//*[@id='1']/h3/a")
+    Delay 2000
+
+    '获取新打开的标签ID
+    标签ID = LibE.神梦_智能填表.取浏览器句柄("", 8 + 16)
+    TracePrint 标签ID
+
+    '切换到新打开的标签页
+    TracePrint LibE.神梦_智能填表.网页_标签切换(标签ID)
+    Delay 2000
+
+    网页标题 = LibE.神梦_智能填表.网页_取标题()
+    MsgBox 网页标题, 1+64+4096, "获取当前网页标题"
+    
+    MsgBox "脚本执行完毕！", 1+64+4096, "填表例子"
+Else 
+    MsgBox "出错，绑定浏览器失败！" & vbCrLf & vbCrLf &"失败原因：" & vbCrLf & [错误提示], 1 + 16 + 4096, "警告！"
+    ExitScript 
+End If

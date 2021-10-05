@@ -1,0 +1,3082 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <title>按键精灵命令帮助</title>
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/gh/SMWHff/SMOS@master/JS/shCore.js" charset="gbk"></script>
+    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/gh/SMWHff/SMOS@master/CSS/SyntaxHighlighter.css">
+    <link rel="stylesheet" type="text/css" href="http://cdn.jsdelivr.net/gh/SMWHff/SMOS@master/CSS/help.css">
+    <style>
+    body{font-size:12px; font-family:Verdana,"宋体"}
+    .ts{ background:#fff; margin:0 0 40px 0;}
+    .ts th{ color:#7B797B; background:#DEDFDE; line-height:24px;}
+    .ts td {padding:6px 0;}
+    .name { font-size:16px; font-weight:bold; border-top:1px dashed #9C9A9C; border-bottom:1px dashed #9C9A9C; color:#006939;}
+    .canshu { background:#E7E7EF;}
+    .red{ color:#d60000;}
+    .blue{ color:#0000FF;}
+    .green{ color:#006939;}
+    .fanhui{ border-bottom:1px dashed #9C9A9C;}
+    .lizi{ border-bottom:1px dashed #9C9A9C;}
+    /* Language specific styles */
+    /*
+      comment 为注释代码着色
+      string  为字符串文字着色
+      keyword 为关键字着色
+      preprocessor 自定义规则着色
+    */
+    .dp-highlighter .comment, .dp-highlighter .comments { color: darkgreen; background-color: inherit; }
+    .dp-highlighter .string { color: darkgray; background-color: inherit; }
+    .dp-highlighter .keyword { color: #0000FF; font-weight: bold; background-color: inherit; }
+    .dp-highlighter .preprocessor { color: #FF00FF; background-color: inherit; }
+    .dp-highlighter .composed { color: #FF6100; background-color: inherit; }
+    </style>
+</head>
+<body>	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>模板作者：</th><td class='name'>
+<a name='SMWH'></a><span Style='color:#FF00FF;'>HTML模板----神梦无痕·提供</span>
+</td></tr><tr><th>功能说明：</th><td>
+<span Style='color:#006939;'>本文件通过《神梦命令帮助编辑器》编辑制作完成！</span>
+</td></tr><tr><th>联系方式：</th><td class='canshu'><pre>
+联系QQ：<a href="tencent://message/?Menu=yes&uin=1042207232&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" alt="神梦无痕" title="神梦无痕"><U>1042207232</U></a><br>
+交流Q群：<a target="_blank" href="http://shang.qq.com/wpa/qunwpa?idkey=c2a1d4064a19ccc5a1ee4d05b5608e164c9371f4589aab48f73e291f6a1295cd"><img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="按键易语言TC放单群 584781753" title="按键易语言TC放单群 584781753" /></a>
+</pre></td></tr><tr><th>业务范围：</th><td class='fanhui'>
+<span Style='color:#0000FF;'><B>专业定制PC，安卓，苹果，模拟器，办公，Post注册等模拟操作，解放双手，轻松搞定！</B></span>
+</td></tr><tr><th>脚本例子：<br /><span class='red'>(8.x语法)</span>
+</th><td class='lizi'><pre name="code8_SMWH" class="vb" id="code8_SMWH">
+无
+</pre></td></tr></table>	
+
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='_初始化'></a>_初始化 
+</td></tr><tr><th>命令功能：</th><td>
+初始化命令库，使用前必须调用该命令。脚本结束之前记得调用 <B>_销毁()</B> 命令
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，授权码，<a style='color:blue' href='http://pan.baidu.com/s/1dESHf8X' target="_blank">【神梦抓抓工具上购买】</a>
+参数2【必选】：文本型，附加参数，一般留空就行
+                     格式为JSON字符串：
+                     {
+                         '是否显示错误弹窗': true或false
+                     }
+</pre></td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8__初始化" class="vb" id="code8__初始化">
+授权码 = "0123456789ABCDEF"  '填入授权码
+
+//记得要先初始化命令库，才能用命令库中的功能
+If LibE.神梦_智能填表._初始化(授权码, "") = False  Then 
+    MsgBox "出错，智能填表初始化失败！", 1 + 16 + 4096, "警告！"
+    ExitScript 
+End If
+
+
+//启动谷歌浏览器
+If LibE.神梦_智能填表.绑定("Chrome.exe") Then 
+    
+    '打开百度网址
+    Call LibE.神梦_智能填表.网页_跳转("https://www.baidu.com/")
+    Delay 2000
+    
+    '输入“按键精灵”
+    Call LibE.神梦_智能填表.元素_置输入框("按键精灵", "id:kw") 
+    Delay 2000
+    
+    '点击百度一下
+    Call LibE.神梦_智能填表.元素_点击("id:su")
+    Delay 3500
+    
+    MsgBox "脚本执行完毕！", 1+64+4096, "填表例子"
+Else 
+    MsgBox "出错，绑定浏览器失败！" & vbCrLf & vbCrLf &"失败原因：" & vbCrLf & [错误提示], 1 + 16 + 4096, "警告！"
+    ExitScript 
+End If
+
+
+//授权后的小精灵无法保存QUI界面配置，需要加上如下代码
+'加载配置文件
+Event Form1.Load
+    Call Plugin.File.CopyFile("C:\uservar.ini", GetExeDir() & "uservar.ini" )
+End Event
+
+'保存配置文件
+Event Form1.UnLoad
+    Form1.SaveSetting : Delay 1000
+    Call Plugin.File.CopyFile(GetExeDir() & "uservar.ini", "C:\uservar.ini")
+End Event
+</pre></td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='_销毁'></a>_销毁 
+</td></tr><tr><th>命令功能：</th><td>
+销毁命令库，使用完毕后需要调用该命令
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</pre></td></tr><tr><th>返回值：</th><td class='fanhui'>
+无
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8__销毁" class="vb" id="code8__销毁">
+//软件关闭时调用
+Event Form1.UnLoad
+    Call LibE.神梦_智能填表._销毁()
+End Event
+</pre></td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='绑定'></a>绑定 
+</td></tr><tr><th>命令功能：</th><td>
+绑定浏览器句柄，所有支持IE内核的浏览器都可以绑定，Chrome内核只能使用谷歌浏览器<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.Bind
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口句柄（类名为：Internet Explorer_Server）
+              文本型，进程名（IE.exe=IE浏览器；WQM.exe=WQM浏览器；SGuo.exe=松果浏览器；WebBox.exe=外置浏览器；
+                               Web.ocx=QUI浏览器控件；Chrome.exe=谷歌浏览器）
+</pre></td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_绑定" class="vb" id="code8_绑定">
+授权码 = "0123456789ABCDEF"  '填入授权码
+
+//记得要先初始化命令库，才能用命令库中的功能
+If LibE.神梦_智能填表._初始化(授权码, "") = False  Then 
+    MsgBox "出错，智能填表初始化失败！", 1 + 16 + 4096, "警告！"
+    ExitScript 
+End If
+
+
+//启动IE浏览器
+If LibE.神梦_智能填表.绑定("IE.exe") Then 
+    TracePrint LibE.神梦_智能填表.网页_取网址()
+    TracePrint LibE.神梦_智能填表.网页_取标题()
+Else 
+    TracePrint "IE浏览器启动失败！"
+End If
+
+
+//启动谷歌浏览器
+If LibE.神梦_智能填表.绑定("Chrome.exe") Then 
+    TracePrint LibE.神梦_智能填表.网页_取网址()
+    TracePrint LibE.神梦_智能填表.网页_取标题()
+Else 
+    TracePrint "谷歌浏览器启动失败！"
+End If
+</pre></td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='绑定多开'></a>绑定多开 
+</td></tr><tr><th>命令功能：</th><td>
+绑定多开浏览器句柄，支持IE浏览器和谷歌浏览器
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，进程名（SGuo.exe=松果浏览器；Chrome.exe=谷歌浏览器）
+参数2【必选】：整数型，多开序号，不可与其他线程的多开序号冲突，取值范围是 1~56000
+参数3【必选】：文本型，网址
+参数4【必选】：数组型，扩展参数，Array(是否无头模式, 是否无痕模式, 设置代理IP, 设置UserAgent, 设置Cookies, 原始参数)
+                        扩展参数(0)=逻辑型，是否无头模式，默认 False
+                        扩展参数(1)=逻辑型，是否无痕模式，默认 True
+                        扩展参数(2)=文本型，设置代理IP，格式：IP+冒号+端口
+                        扩展参数(3)=文本型，设置UserAgent
+                        扩展参数(4)=文本型，设置Cookies
+                        扩展参数(5)=文本型，原始参数，多个参数用“||”隔开
+</pre></td></tr><tr><th>返回值：</th><td class='fanhui'>
+逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_绑定多开" class="vb" id="code8_绑定多开">
+DimEnv 入栈锁, 多开序号, 多开网址
+
+授权码 = "0123456789ABCDEF" '填入你自己的授权码
+
+ 
+//记得要先初始化命令库，才能用命令库中的功能
+If LibE.神梦_智能填表._初始化(授权码, "") = False  Then
+    MsgBox "出错，智能填表初始化失败！", 1 + 16 + 4096, "警告！"  
+    ExitScript    
+End If
+
+//'设置5个浏览器窗口
+多开线程 = 5
+
+For i = 1 To 多开线程
+    多开序号 = i
+    入栈锁 = True '开始入栈，打开入栈锁开关
+    BeginThread 多线程(多开序号, 多开网址)
+    
+    '判断入栈锁状态，True=循环等待；False=跳出循环
+    While 入栈锁
+        Delay 100
+    Wend
+Next
+MsgBox "所有线程启动完成，正在执行中。。。", 1 + 64 + 4096, "温馨提示！"
+
+
+Sub 多线程(序号, 网址)
+    '***********************************（重要！勿动）启动并绑定浏览器*************************************************
+    '设置浏览器参数
+    扩展参数 = Array(是否无头模式, 是否无痕模式, 设置代理IP, 设置UserAgent, 设置Cookies, 原始参数)
+    
+    If LibE.神梦_智能填表.绑定多开("Chrome.exe", 序号, 网址, 扩展参数) = False Then 
+        TracePrint "【多开失败】：" & 序号
+        Exit Sub 
+    End If
+    入栈锁 = False'关闭入栈锁（打开浏览器时，需要利用入栈锁排队一个一个打开，不能同时开，否则会冲突）
+    '***********************************（重要！勿动）启动并绑定浏览器*************************************************
+    
+    
+    //'=============================【你的代码写在下面】
+    '↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    Randomize
+    Call LibE.神梦_智能填表.网页_置浏览器位置(CInt((Plugin.Sys.GetScRX() - 200) * Rnd), CInt((Plugin.Sys.GetScRY() - 200) * Rnd))
+    Call LibE.神梦_智能填表.网页_置浏览器大小(200, 200)
+    
+    TracePrint "【多开序号："& 序号 &"】" & LibE.神梦_智能填表.网页_取标题()
+    TracePrint "【多开序号："& 序号 &"】" & LibE.神梦_智能填表.网页_取网址()
+    For n = 0 To 20
+        Call LibE.神梦_智能填表.元素_置输入框(序号 & "_" & n, "#kw")
+        Delay 1000
+    Next
+    '↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
+    //'==============================【你的代码写在上面】
+    
+    
+    '***********************************（重要！勿动）关闭浏览器*************************************************
+    Call LibE.神梦_智能填表.关闭浏览器()
+    '***********************************（重要！勿动）关闭浏览器*************************************************
+End Sub
+</pre></td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='创建浏览器'></a>创建浏览器 
+</td></tr><tr><th>命令功能：</th><td>
+在QUI界面上创建浏览器控件
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，父窗口句柄
+参数2【必选】：文本型，网址
+参数3【必选】：整数型，左上角X坐标
+参数4【必选】：整数型，左上角Y坐标
+参数5【必选】：整数型，宽度
+参数6【必选】：整数型，高度
+</pre></td></tr><tr><th>返回值：</th><td class='fanhui'>
+整数型，窗口句柄
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_创建浏览器" class="vb" id="code8_创建浏览器">
+//窗口QUI窗体时创建浏览器
+Event Form1.Load
+    授权码 = "0123456789ABCDEF"  '填入授权码
+    
+    '初始化智能填表
+    Call LibE.神梦_智能填表._初始化(授权码, "")
+	
+    '左上角X, 左上角Y, 宽度, 高度 都为 0 时，浏览器则铺面窗口
+    浏览器句柄 = LibE.神梦_智能填表.创建浏览器(Form1.Hwnd, "www.神梦.com", 0, 0, 0, 0)
+End Event
+
+
+//卸载时要关闭创建的浏览器
+Event Form1.UnLoad
+    Call LibE.神梦_智能填表.关闭浏览器()
+End Event
+</pre></td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='访问网页'></a>访问网页 
+</td></tr><tr><th>命令功能：</th><td>
+访问网页，返回源码
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网址
+参数2【可选】：文本型，访问方式，默认“GET”、“POST”、“HEAD”
+参数3【可选】：文本型，提交信息，“POST”时要用到
+参数4【可选】：文本型，附加协议
+参数5【可选】：文本型，代理地址，IP地址 + 冒号 + 端口
+</pre></td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，返回源码
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_访问网页" class="vb" id="code8_访问网页">
+//访问网页，返回源码
+TracePrint LibE.神梦_智能填表.访问网页("http://bbs.anjian.com/", "GET", "", "", "")
+</pre></td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='关闭浏览器'></a>关闭浏览器 
+</td></tr><tr><th>命令功能：</th><td>
+关闭浏览器当前绑定的浏览器
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</pre></td></tr><tr><th>返回值：</th><td class='fanhui'>
+逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_关闭浏览器" class="vb" id="code8_关闭浏览器">
+//关闭浏览器当前绑定的浏览器
+Call LibE.神梦_智能填表.关闭浏览器()
+</pre></td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='键盘_按下'></a>键盘_按下 
+</td></tr><tr><th>命令功能：</th><td>
+向当前标签的网页发送一个键盘按下消息<br><br><B>WQM命令</B>：<span class='blue'>Plugin</span>.<span class='blue'>Web</span>.KeyDown
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，按键虚拟码
+</pre></td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_键盘_按下" class="vb" id="code8_键盘_按下">
+// 在网页中按下 A 键 (按键码：65) 
+'IE浏览器
+Call LibE.神梦_智能填表.键盘_按下(65)
+
+'谷歌浏览器
+[元素特征] = "INPUT[type='text']"
+Call LibE.神梦_智能填表.键盘_按下(65)
+
+</pre></td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='键盘_弹起'></a>键盘_弹起 
+</td></tr><tr><th>命令功能：</th><td>
+向当前标签的网页发送一个键盘弹起消息<br><br><B>WQM命令</B>：<span class='blue'>Plugin</span>.<span class='blue'>Web</span>.KeyUp
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，按键虚拟码
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_键盘_弹起" class="vb" id="code8_键盘_弹起">
+// 在网页中弹起 A 键 (按键码：65)
+'IE浏览器
+Call LibE.神梦_智能填表.键盘_弹起(65)
+
+'谷歌浏览器
+[元素特征] = "INPUT[type='text']"
+Call LibE.神梦_智能填表.键盘_弹起(65)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='键盘_点击'></a>键盘_点击 
+</td></tr><tr><th>命令功能：</th><td>
+向当前标签网页发送一个按键消息<br><br><B>WQM命令</B>：<span class='blue'>Plugin</span>.<span class='blue'>Web</span>.KeyPress
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，按键虚拟码
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_键盘_点击" class="vb" id="code8_键盘_点击">
+//下面这句用于向后台窗口句柄(变量：Hwnd)发送一个键盘(按键码：65) 按键A
+'IE浏览器
+Call LibE.神梦_智能填表.键盘_点击(65)
+
+'谷歌浏览器
+[元素特征] = "INPUT[type='text']"
+Call LibE.神梦_智能填表.键盘_点击(65)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='键盘_输入文本'></a>键盘_输入文本 
+</td></tr><tr><th>命令功能：</th><td>
+发送字符串文本消息<br><br><B>WQM命令</B>：<span class='blue'>Plugin</span>.<span class='blue'>Web</span>.SendString
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，文本消息
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_键盘_输入文本" class="vb" id="code8_键盘_输入文本">
+//发送字符串文本消息
+'IE浏览器
+Call LibE.神梦_智能填表.键盘_输入文本("测试一下看看行不行")
+
+'谷歌浏览器
+[元素特征] = "INPUT[type='text']"
+Call LibE.神梦_智能填表.键盘_输入文本("测试一下看看行不行")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='键盘_组合键'></a>键盘_组合键 
+</td></tr><tr><th>命令功能：</th><td>
+向当前标签网页发送一个组合键消息
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，组合键，Ctrl+A、 Ctrl+Enter
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_键盘_组合键" class="vb" id="code8_键盘_组合键">
+//下面这句用于向后台窗口句柄(变量：Hwnd)发送一个组合键(Ctrl+Enter)
+'IE浏览器
+Call LibE.神梦_智能填表.键盘_组合键("Ctrl+Enter")
+
+'谷歌浏览器
+[元素特征] = "INPUT[type='text']"
+Call LibE.神梦_智能填表.键盘_组合键("Ctrl+Enter")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='接码_图形报错'></a>接码_图形报错 
+</td></tr><tr><th>命令功能：</th><td>
+打码平台报错
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：字符串，打码平台（CR=超人打码，LZ=联众打码，CJY=超级鹰打码）
+参数2【必选】：字符串，打码账号
+参数3【必选】：字符串，打码密码
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_接码_图形报错" class="vb" id="code8_接码_图形报错">
+//打码平台报错
+Call LibE.神梦_智能填表.接码_图形报错("CR", "user", "pass")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='接码_图形登录'></a>接码_图形登录 
+</td></tr><tr><th>命令功能：</th><td>
+查询打码平台余额
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：字符串，打码平台（CR=超人打码，LZ=联众打码，CJY=超级鹰打码）
+参数2【必选】：字符串，打码账号
+参数3【必选】：字符串，打码密码
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：正整数=打码余额；-1=账号或密码不正确；-2=用户不存在；-3=余额不足；-4=验证码类型错误；-99|错误=其他错误信息
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_接码_图形登录" class="vb" id="code8_接码_图形登录">
+//查询打码平台余额
+打码余额 = LibE.神梦_智能填表.接码_图形登录("CR", "user", "pass")
+TracePrint "打码余额：" & 打码余额
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='接码_图形验证'></a>接码_图形验证 
+</td></tr><tr><th>命令功能：</th><td>
+自动接打码平台打码
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：字符串，打码平台（SMWH=神梦打码，CR=超人打码，LZ=联众打码，JY=超级鹰打码）
+参数2【必选】：字符串，特征_路径_链接，支持（元素特征、图片路径、图片链接）
+参数3【必选】：字符串，打码账号
+参数4【必选】：字符串，打码密码
+参数5【必选】：字符串，验证码类型
+    神梦打码：1000，字母或者数字（开通神梦会员免费使用，账号、密码留空）
+    超人打码：57716，1到4位字母或者数字
+             57717，1到5位字母或者数字
+             57718，1到6位字母或者数字
+             57719，1到7位字母或者数字
+             57720，1到8位字母或者数字
+             57721，1-4位字母中文
+             57722，顺序输入第xxxx位字符
+             57723，坐标题
+             61303，滑动拼图提
+             61304，数字运算题
+             61305，依次点文字坐标
+    联众打码：https://www.jsdati.com/price
+  超级鹰打码：http://www.chaojiying.com/price.html
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本=返回验证码；-1=账号或密码不正确；-2=用户不存在；-3=余额不足；-4=验证码类型错误；-99|错误=其他错误信息
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_接码_图形验证" class="vb" id="code8_接码_图形验证">
+授权码 = "0123456789ABCDEF"  '填入授权码
+
+//记得要先初始化命令库，才能用命令库中的功能
+If LibE.神梦_智能填表._初始化(授权码, "") = False  Then 
+    MsgBox "出错，智能填表初始化失败！", 1 + 16 + 4096, "警告！"
+    ExitScript 
+End If
+ 
+打码平台 = "CR" 
+打码账号 = "user"
+打码密码 = "passw"
+
+//查询打码平台余额
+打码余额 = LibE.神梦_智能填表.接码_图形登录(打码平台, 打码账号, 打码密码)
+TracePrint "打码余额：" & 打码余额
+
+If LibE.神梦_智能填表.绑定("IE.exe") Then 
+    
+    //跳转到测试页面
+    Call LibE.神梦_智能填表.网页_跳转("http://cp.3v.do/host/index.htm")
+    Call LibE.神梦_智能填表.网页_禁止警报(True)
+    
+    //这里测试用的是QQ超人打码
+    返回值 = LibE.神梦_智能填表.接码_图形验证(打码平台, "tag:IMG&index:1", 打码账号,打码密码, "57716")
+    If Left(返回值, 1) <> "-" Then 
+        MsgBox "验证码：" & 返回值, 64+4096, "打码成功！"
+    ElseIf 返回值 = "-1" Then 
+        MsgBox "账号或密码不正确", 16+4096, "打码失败！"
+    ElseIf 返回值 = "-2" Then 
+        MsgBox "用户不存在", 16 + 4096, "打码失败！"
+    ElseIf 返回值 = "-3" Then 
+        MsgBox "余额不足", 16 + 4096, "打码失败！"
+    ElseIf 返回值 = "-4" Then 
+        MsgBox "验证码类型错误", 16 + 4096, "打码失败！"
+    Else 
+        MsgBox 返回值, 16+4096, "打码失败！"
+    End If
+End If
+
+//打码平台报错
+Call LibE.神梦_智能填表.接码_图形报错(打码平台, 打码账号, 打码密码)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='框架_进入'></a>框架_进入 
+</td></tr><tr><th>命令功能：</th><td>
+进入框架，能提高操作元素的速度，不进入也能智能获取元素所在的框架再进行操作。<br><br>注意：操作完后请记得调用 <B>框架_退出()</B> 命令
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，框架索引（通过《神梦抓抓工具》获取）
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：整数型，框架数量
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_框架_进入" class="vb" id="code8_框架_进入">
+//进入框架操作
+Call LibE.神梦_智能填表.框架_进入("0>1")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='框架_枚举'></a>框架_枚举 
+</td></tr><tr><th>命令功能：</th><td>
+框架枚举
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，框架列表，每个框架用“|”分割
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_框架_枚举" class="vb" id="code8_框架_枚举">
+//枚举框架
+框架列表 = LibE.神梦_智能填表.框架_枚举()
+分割框架 = Split(框架列表, "|")
+For i = 0 To UBound(分割框架)
+    TracePrint "框架索引：" & 分割框架(i)
+Next
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='框架_退出'></a>框架_退出 
+</td></tr><tr><th>命令功能：</th><td>
+退出框架
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_框架_退出" class="vb" id="code8_框架_退出">
+//退出框架操作
+Call LibE.神梦_智能填表.框架_退出()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='清除Cookie'></a>清除Cookie 
+</td></tr><tr><th>命令功能：</th><td>
+清除Cookie<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.ClearCookie
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_清除Cookie" class="vb" id="code8_清除Cookie">
+//清除Cookie
+Call LibE.神梦_智能填表.清除Cookie()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='清除历史记录'></a>清除历史记录 
+</td></tr><tr><th>命令功能：</th><td>
+清除历史记录<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.ClearHistory
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_清除历史记录" class="vb" id="code8_清除历史记录">
+//清除历史记录
+Call LibE.神梦_智能填表.清除历史记录()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='清除临时文件'></a>清除临时文件 
+</td></tr><tr><th>命令功能：</th><td>
+清除临时文件<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.ClearTemp
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_清除临时文件" class="vb" id="code8_清除临时文件">
+//清除临时文件
+Call LibE.神梦_智能填表.清除临时文件()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='取浏览器句柄'></a>取浏览器句柄 
+</td></tr><tr><th>命令功能：</th><td>
+IE内核：获得浏览器类名为"Internet Explorer_Server"的句柄；<br><br>Chrome内核：获得浏览器标签ID，只支持获取 <B>绑定("Chrome.exe")</B> 命令打开的谷歌，手动打开的获取不到！
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：字符串，搜索的文本
+参数2【必选】：整数型，匹配模式，可组合（方式+内核）
+        方式：1=包含网址；2=包含标题；3=匹配网址；4=匹配标题；5=匹配句柄；6=正则匹配网址；7=正则匹配标题；8=匹配激活标签页（搜索的文本留空）
+        内核：0=IE；16=谷歌
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，IE=窗口句柄；谷歌=标签ID
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_取浏览器句柄" class="vb" id="code8_取浏览器句柄">
+授权码 = "0123456789ABCDEF"  '填入授权码
+
+//记得要先初始化命令库，才能用命令库中的功能
+If LibE.神梦_智能填表._初始化(授权码, "") = False  Then 
+    MsgBox "出错，智能填表初始化失败！", 1 + 16 + 4096, "警告！"
+    ExitScript 
+End If
+
+
+//获取包含指定网址的IE浏览器句柄
+窗口句柄 = LibE.神梦_智能填表.取浏览器句柄("www.anjian.com", 1+0)
+If LibE.神梦_智能填表.绑定(窗口句柄) Then 
+    TracePrint "IE浏览器绑定成功！"
+Else 
+    TracePrint "IE浏览器绑定失败！"
+End If
+
+
+//获取包含指定网址的谷歌浏览器标签ID
+标签ID = LibE.神梦_智能填表.取浏览器句柄("www.anjian.com", 1+16)
+If LibE.神梦_智能填表.绑定(标签ID) Then 
+    TracePrint "谷歌浏览器绑定成功！"
+Else 
+    TracePrint "谷歌浏览器绑定失败！"
+End If
+
+
+//获取当前激活的谷歌浏览器标签ID（参数1留空就行）
+标签ID = LibE.神梦_智能填表.取浏览器句柄("", 8+16)
+If LibE.神梦_智能填表.绑定(标签ID) Then 
+    TracePrint "谷歌浏览器绑定成功！"
+Else 
+    TracePrint "谷歌浏览器绑定失败！"
+End If
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='取外网IP'></a>取外网IP 
+</td></tr><tr><th>命令功能：</th><td>
+获取外网IP
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，外网IP
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_取外网IP" class="vb" id="code8_取外网IP">
+//获取外网IP
+TracePrint LibE.神梦_智能填表.取外网IP()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='取网络时间'></a>取网络时间 
+</td></tr><tr><th>命令功能：</th><td>
+获取网络时间
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，网络时间
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_取网络时间" class="vb" id="code8_取网络时间">
+//获取网络时间
+TracePrint LibE.神梦_智能填表.取网络时间()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='鼠标_滚轮滚动'></a>鼠标_滚轮滚动 
+</td></tr><tr><th>命令功能：</th><td>
+向当前标签的网页发送一个鼠标滚轮滚动消息
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标
+参数2【必选】：整数型，窗口Y坐标
+参数3【必选】：整数型，滚动量，正数向上滚动；负数向下滚动
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_鼠标_滚轮滚动" class="vb" id="code8_鼠标_滚轮滚动">
+//下面这句用于向后台窗口句柄(变量：Hwnd)发送一个鼠标滚轮滚动到客户区域(坐标：10, 10)处滚动5格
+'IE浏览器
+Call LibE.神梦_智能填表.鼠标_滚轮滚动(10, 10, 5)
+
+'谷歌浏览器不支持【鼠标_滚轮滚动】
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='鼠标_移动'></a>鼠标_移动 
+</td></tr><tr><th>命令功能：</th><td>
+向当前标签的网页发送一个鼠标移动消息<br><br><B>WQM命令</B>：<span class='blue'>Plugin</span>.<span class='blue'>Web</span>.MoveTo
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标
+参数2【必选】：整数型，窗口Y坐标
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_鼠标_移动" class="vb" id="code8_鼠标_移动">
+//下面这句用于向后台窗口句柄(变量：Hwnd)发送一个鼠标移动到客户区域(坐标：10, 10)处 
+'IE浏览器
+Call LibE.神梦_智能填表.鼠标_移动(10, 10)
+
+'谷歌浏览器
+[元素特征] = "INPUT[type='text']"
+Call LibE.神梦_智能填表.鼠标_移动(10, 10)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='鼠标_左键按下'></a>鼠标_左键按下 
+</td></tr><tr><th>命令功能：</th><td>
+向当前网页发送一个鼠标左键按下<br><br><B>WQM命令</B>：<span class='blue'>Plugin</span>.<span class='blue'>Web</span>.LeftDown
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标
+参数2【必选】：整数型，窗口Y坐标
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_鼠标_左键按下" class="vb" id="code8_鼠标_左键按下">
+//下面这句用于向后台窗口句柄(变量：Hwnd)的客户区域(坐标：10, 10)处发送一个鼠标左键按下 
+'IE浏览器
+Call LibE.神梦_智能填表.鼠标_左键按下(10, 10)
+
+'谷歌浏览器
+[元素特征] = "INPUT[type='text']"
+Call LibE.神梦_智能填表.鼠标_左键按下(10, 10)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='鼠标_左键弹起'></a>鼠标_左键弹起 
+</td></tr><tr><th>命令功能：</th><td>
+向当前网页发送一个鼠标左键弹起<br><br><B>WQM命令</B>：<span class='blue'>Plugin</span>.<span class='blue'>Web</span>.LeftUp
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标
+参数2【必选】：整数型，窗口Y坐标
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_鼠标_左键弹起" class="vb" id="code8_鼠标_左键弹起">
+//下面这句用于向后台窗口句柄(变量：Hwnd)的客户区域(坐标：10, 10)处发送一个鼠标左键弹起 
+'IE浏览器
+Call LibE.神梦_智能填表.鼠标_左键弹起(10, 10)
+
+'谷歌浏览器
+[元素特征] = "INPUT[type='text']"
+Call LibE.神梦_智能填表.鼠标_左键弹起(10, 10)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='鼠标_左键点击'></a>鼠标_左键点击 
+</td></tr><tr><th>命令功能：</th><td>
+向当前标签的网页发送一个左键单击事件<br><br><B>WQM命令</B>：<span class='blue'>Plugin</span>.<span class='blue'>Web</span>.LeftClick
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标
+参数2【必选】：整数型，窗口Y坐标
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_鼠标_左键点击" class="vb" id="code8_鼠标_左键点击">
+//下面这句用于向后台窗口句柄(变量：Hwnd)的客户区域(坐标：5, 5)处发送一个鼠标左键单击  
+'IE浏览器
+Call LibE.神梦_智能填表.鼠标_左键点击(10, 10)
+
+'谷歌浏览器
+[元素特征] = "INPUT[type='text']"
+Call LibE.神梦_智能填表.鼠标_左键点击(10, 10)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='鼠标_左键双击'></a>鼠标_左键双击 
+</td></tr><tr><th>命令功能：</th><td>
+向当前网页发送一个鼠标左键双击<br><br><B>WQM命令</B>：<span class='blue'>Plugin</span>.<span class='blue'>Web</span>.LeftDoubleClick
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标
+参数2【必选】：整数型，窗口Y坐标
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_鼠标_左键双击" class="vb" id="code8_鼠标_左键双击">
+//下面这句用于向后台窗口句柄(变量：Hwnd)的客户区域(坐标：10, 10)处发送一个鼠标左键双击
+'IE浏览器
+Call LibE.神梦_智能填表.鼠标_左键双击(10, 10)
+
+'谷歌浏览器
+[元素特征] = "INPUT[type='text']"
+Call LibE.神梦_智能填表.鼠标_左键双击(10, 10)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='图色_比色'></a>图色_比色 
+</td></tr><tr><th>命令功能：</th><td>
+后台对比判断指定点颜色（只支持IE内核）
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标
+参数2【必选】：整数型，窗口Y坐标
+参数3【必选】：文本型，颜色值
+参数4【必选】：小数型，相似度，范围 0~1.0
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+文本型，16进制颜色值
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_图色_比色" class="vb" id="code8_图色_比色">
+//后台判断坐标点(100,100)的颜色是否“e1b072”
+If LibE.神梦_智能填表.图色_比色(100, 100, "e1b072", 0.9) Then 
+    TracePrint "颜色等于"
+Else 
+    TracePrint "颜色不等于" 
+End If
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='图色_取色'></a>图色_取色 
+</td></tr><tr><th>命令功能：</th><td>
+得到后台指定点颜色（只支持IE内核）
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标 
+参数2【必选】：整数型，窗口Y坐标
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+文本型，16进制颜色值
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_图色_取色" class="vb" id="code8_图色_取色">
+//后台获取网页中(坐标：5, 5)处的颜色  
+颜色值 = LibE.神梦_智能填表.图色_取色(5, 5)
+TracePrint "【网页坐标(5,5)处的颜色值】：" & 颜色值
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='图色_找色'></a>图色_找色 
+</td></tr><tr><th>命令功能：</th><td>
+后台区域找色（只支持IE内核）
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口左上角X坐标 
+参数2【必选】：整数型，窗口左上角Y坐标 
+参数3【必选】：整数型，窗口右下角X坐标 
+参数4【必选】：整数型，窗口右下角Y坐标 
+参数5【必选】：文本型，16进制颜色值
+参数6【必选】：小数型，相似度，范围 0~1.0
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+文本型，颜色位置坐标(X坐标|Y坐标)
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_图色_找色" class="vb" id="code8_图色_找色">
+//模糊查找网页中的指定矩形区域内指定颜色
+返回值 = LibE.神梦_智能填表.图色_找色(0, 0, 1024, 768, "0000FF", 0.9)
+XY = Split(返回值, "|")
+If UBound(XY) >= 1 Then 
+    intX = XY(0)
+    intY = XY(1)
+    TracePrint "【后台X坐标】：" & intX
+    TracePrint "【后台Y坐标】：" & intY
+End If
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='图色_找图'></a>图色_找图 
+</td></tr><tr><th>命令功能：</th><td>
+后台区域找图（只支持IE内核）
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口左上角X坐标 
+参数2【必选】：整数型，窗口左上角Y坐标 
+参数3【必选】：整数型，窗口右下角X坐标 
+参数4【必选】：整数型，窗口右下角Y坐标 
+参数5【必选】：文本型，BMP图片路径 
+参数6【必选】：小数型，相似度，范围 0~1.0
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+文本型，返回找到的坐标(X坐标|Y坐标)
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_图色_找图" class="vb" id="code8_图色_找图">
+//在网页中查找图片"C:\PIC.bmp"的坐标 
+返回值 = LibE.神梦_智能填表.图色_找图(0, 0, 1024, 768, "C:\PIC.bmp", 0.9)
+XY = Split(返回值, "|")
+If UBound(XY) >= 1 Then 
+    intX = XY(0)
+    intY = XY(1)
+    TracePrint "【后台X坐标】：" & intX
+    TracePrint "【后台Y坐标】：" & intY
+End If
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_保存页面'></a>网页_保存页面 
+</td></tr><tr><th>命令功能：</th><td>
+下载文件，保存网页或图片，保存指定URL的文件到本地磁盘<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.Save
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，需要下载的目标URL
+参数2【必选】：文本型，保存路径
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_保存页面" class="vb" id="code8_网页_保存页面">
+//下载文件，保存网页或图片
+Call LibE.神梦_智能填表.网页_保存页面("http://bbs.anjian.com/templates/default/Images/logo1.png", "C:\logo1.png")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_标签关闭'></a>网页_标签关闭 
+</td></tr><tr><th>命令功能：</th><td>
+关闭当前标签页<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.TabClose
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_标签关闭" class="vb" id="code8_网页_标签关闭">
+//关闭当前标签页
+Call LibE.神梦_智能填表.网页_标签关闭()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_标签切换'></a>网页_标签切换 
+</td></tr><tr><th>命令功能：</th><td>
+切换到指定标签页<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.TabGoto
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数/文本型，该参数可以通过 <B>取浏览器句柄()</B> 命令来获取，该命令也支持谷歌（获取就不是窗口句柄，而是标签ID）！
+              IE内核(整数型)：窗口句柄（类名为：Internet Explorer_Server）
+              谷歌内核(文本型)：标签ID
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_标签切换" class="vb" id="code8_网页_标签切换">
+//获取包含指定网址的IE浏览器句柄
+窗口句柄 = LibE.神梦_智能填表.取浏览器句柄("www.anjian.com", 1+0)
+//切换到指定标签页
+Call LibE.神梦_智能填表.网页_标签切换(窗口句柄)
+
+
+
+//获取包含指定网址的谷歌浏览器句柄
+标签ID = LibE.神梦_智能填表.取浏览器句柄("www.anjian.com", 1+16)
+//切换到指定标签页
+Call  LibE.神梦_智能填表.网页_标签切换(标签ID)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_标签新建'></a>网页_标签新建 
+</td></tr><tr><th>命令功能：</th><td>
+创建一个新的标签<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.TabNew
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，URL
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：整数型，IE=窗口句柄；谷歌=标签ID
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_标签新建" class="vb" id="code8_网页_标签新建">
+//创建一个新的标签
+Call LibE.神梦_智能填表.网页_标签新建("http://www.神梦.com/")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_高亮关键字'></a>网页_高亮关键字 
+</td></tr><tr><th>命令功能：</th><td>
+设置指定关键字高亮
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，关键字
+参数2【必选】：文本型，文字颜色
+参数3【必选】：文本型，背景颜色
+参数4【必选】：文本型，是否加粗
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：整数型，关键字数量
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_高亮关键字" class="vb" id="code8_网页_高亮关键字">
+//设置指定关键字高亮
+关键字数量 = LibE.神梦_智能填表.网页_高亮关键字("神梦", "FF0000", "D6F20D", True)
+TracePrint 关键字数量
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_后退'></a>网页_后退 
+</td></tr><tr><th>命令功能：</th><td>
+后退操作<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.Back
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_后退" class="vb" id="code8_网页_后退">
+//后退操作
+Call LibE.神梦_智能填表.网页_后退()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_截图'></a>网页_截图 
+</td></tr><tr><th>命令功能：</th><td>
+截取网页图像至文件
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，区域左上角x坐标
+参数2【必选】：整数型，区域左上角y坐标
+参数3【必选】：整数型，区域右下角x坐标
+参数4【必选】：整数型，区域右下角y坐标
+参数5【必选】：文本型，保存路径
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_截图" class="vb" id="code8_网页_截图">
+//截取网页图像至文件
+If LibE.神梦_智能填表.网页_截图(0, 0, 500, 500, "C:\网页截图.jpg") Then 
+    TracePrint "截图成功！"
+    RunApp "C:\网页截图.jpg"
+Else 
+    TracePrint "截图失败！"
+End If
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_禁止弹窗'></a>网页_禁止弹窗 
+</td></tr><tr><th>命令功能：</th><td>
+禁止Alert等弹出式窗口，可以禁用当前窗口下的所有弹窗
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+无
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_禁止弹窗" class="vb" id="code8_网页_禁止弹窗">
+//禁止弹窗
+Call LibE.神梦_智能填表.网页_禁止弹窗()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_禁止警报'></a>网页_禁止警报 
+</td></tr><tr><th>命令功能：</th><td>
+只对IE6有效。用于屏蔽HTTPS网页操作时弹出的安全警告信息框
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：逻辑型，是否禁止
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_禁止警报" class="vb" id="code8_网页_禁止警报">
+//禁止警报
+Call LibE.神梦_智能填表.网页_禁止警报(True)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_禁止未响应窗口'></a>网页_禁止未响应窗口 
+</td></tr><tr><th>命令功能：</th><td>
+禁止所有未响应窗口，一旦检测到未响应，就自动关闭该窗口（会开启一个线程来循环检测）
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：逻辑型，是否开启
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+无
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_禁止未响应窗口" class="vb" id="code8_网页_禁止未响应窗口">
+//禁止所有未响应窗口（会开启一个线程来循环检测）
+Call LibE.神梦_智能填表.网页_禁止未响应窗口(True)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_枚举元素'></a>网页_枚举元素 
+</td></tr><tr><th>命令功能：</th><td>
+枚举标记指定标签元素
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素标签（tag）
+       标签名：    A，超链接标签
+                 img，图像标签
+               input，输入框标签
+              select，下拉框标签
+              button，按钮标签
+                 div，定义块标签
+                span，组合框标签
+                   p，段落标签
+
+              （...还有很多，自己去发掘吧！）
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，枚举数量
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_枚举元素" class="vb" id="code8_网页_枚举元素">
+//枚举标记 A 标签元素
+TracePrint LibE.神梦_智能填表.网页_枚举元素("A")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_前进'></a>网页_前进 
+</td></tr><tr><th>命令功能：</th><td>
+前进操作<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.Forward
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_前进" class="vb" id="code8_网页_前进">
+//前进操作
+Call LibE.神梦_智能填表.网页_前进()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_取Cookie'></a>网页_取Cookie 
+</td></tr><tr><th>命令功能：</th><td>
+获取当前页面Cookie
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，当前Cookie
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_取Cookie" class="vb" id="code8_网页_取Cookie">
+//获取当前页面Cookie
+TracePrint LibE.神梦_智能填表.网页_取Cookie()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_取IE句柄'></a>网页_取IE句柄 
+</td></tr><tr><th>命令功能：</th><td>
+获得当前网页IE句柄，类名为"Internet Explorer_Server"的句柄<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.GetHwnd
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：整数型，IE窗口句柄
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_取IE句柄" class="vb" id="code8_网页_取IE句柄">
+//获得当前网页IE句柄
+TracePrint LibE.神梦_智能填表.网页_取IE句柄()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_取UserAgent'></a>网页_取UserAgent 
+</td></tr><tr><th>命令功能：</th><td>
+获取浏览器的UserAgent
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_取UserAgent" class="vb" id="code8_网页_取UserAgent">
+//获取浏览器的UserAgent
+TracePrint LibE.神梦_智能填表.网页_取UserAgent()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_取编码'></a>网页_取编码 
+</td></tr><tr><th>命令功能：</th><td>
+获得当前网页的编码格式
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，当前编码
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_取编码" class="vb" id="code8_网页_取编码">
+//获得当前网页的编码格式
+TracePrint LibE.神梦_智能填表.网页_取编码()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_取标题'></a>网页_取标题 
+</td></tr><tr><th>命令功能：</th><td>
+获取当前标签页的标题<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.GetTitle
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，当前标题
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_取标题" class="vb" id="code8_网页_取标题">
+//获取当前标签页的标题
+TracePrint LibE.神梦_智能填表.网页_取标题()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_取弹窗内容'></a>网页_取弹窗内容 
+</td></tr><tr><th>命令功能：</th><td>
+获取弹出窗口上的文本内容<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.GetDialogContent
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+文本型，文本内容
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_取弹窗内容" class="vb" id="code8_网页_取弹窗内容">
+//获取弹窗内容
+Call LibE.神梦_智能填表.网页_预处理弹窗("", True)
+Call LibE.神梦_智能填表.网页_执行JS(0, "alert('嗨！你好！');")
+TracePrint "弹窗内容：" & LibE.神梦_智能填表.网页_取弹窗内容()
+
+//带是否按钮的弹窗
+Call LibE.神梦_智能填表.网页_预处理弹窗("神梦无痕", True)
+TracePrint "弹窗返回：" & LibE.神梦_智能填表.网页_执行JS(1, "return confirm('是否点击确定按钮？');")
+TracePrint "弹窗内容：" & LibE.神梦_智能填表.网页_取弹窗内容()
+
+//往弹窗里设置指定的内容
+Call LibE.神梦_智能填表.网页_预处理弹窗("神梦无痕", True)
+TracePrint "弹窗返回：" & LibE.神梦_智能填表.网页_执行JS(1, "return prompt('请输入您的名字：', '');")
+TracePrint "弹窗内容：" & LibE.神梦_智能填表.网页_取弹窗内容()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_取滚动条位置'></a>网页_取滚动条位置 
+</td></tr><tr><th>命令功能：</th><td>
+获取滚动条所在位置
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，返回坐标 X|Y
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_取滚动条位置" class="vb" id="code8_网页_取滚动条位置">
+//获取滚动条所在位置
+TracePrint LibE.神梦_智能填表.网页_取滚动条位置()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_取浏览器大小'></a>网页_取浏览器大小 
+</td></tr><tr><th>命令功能：</th><td>
+获取浏览器网页窗口大小
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+文本型， W|H
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_取浏览器大小" class="vb" id="code8_网页_取浏览器大小">
+//获取浏览器网页窗口大小
+WH = Split(LibE.神梦_智能填表.网页_取浏览器大小(), "|")
+TracePrint "网页窗口宽度：" & WH(0)
+TracePrint "网页窗口高度：" & WH(1)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_取浏览器位置'></a>网页_取浏览器位置 
+</td></tr><tr><th>命令功能：</th><td>
+获取浏览器网页窗口位置
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+文本型， X|Y
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_取浏览器位置" class="vb" id="code8_网页_取浏览器位置">
+//获取浏览器网页窗口位置
+XY = Split(LibE.神梦_智能填表.网页_取浏览器位置(), "|")
+TracePrint "网页窗口X坐标：" & XY(0)
+TracePrint "网页窗口Y坐标：" & XY(1)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_取网址'></a>网页_取网址 
+</td></tr><tr><th>命令功能：</th><td>
+得到当前网页的网址<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.GetURL
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，当前网址
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_取网址" class="vb" id="code8_网页_取网址">
+//得到当前网页的网址
+TracePrint LibE.神梦_智能填表.网页_取网址()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_取源码'></a>网页_取源码 
+</td></tr><tr><th>命令功能：</th><td>
+获取当前页面元素源码
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，当前源码
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_取源码" class="vb" id="code8_网页_取源码">
+//获取当前页面元素源码
+TracePrint LibE.神梦_智能填表.网页_取源码()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_是否就绪'></a>网页_是否就绪 
+</td></tr><tr><th>命令功能：</th><td>
+是否就绪
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，超时时间（单位秒）
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_是否就绪" class="vb" id="code8_网页_是否就绪">
+//等待网页加载完毕，超时 30 秒
+Call LibE.神梦_智能填表.网页_是否就绪(30)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_是否就绪加强'></a>网页_是否就绪加强 
+</td></tr><tr><th>命令功能：</th><td>
+是否就绪加强
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，欲判断的关键字（多个用“|”分割）
+参数2【必选】：整数型，判断方式（0=文本方式，1=源码方式）
+参数3【必选】：整数型，超时时间（单位秒）
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：整数型，返回文本索引（从1开始）比如：关键字=“张三|李四|王五”,找到“张三”返回1，找到“李四”返回2；失败返回0
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_是否就绪加强" class="vb" id="code8_网页_是否就绪加强">
+//判断网页是否加载完毕加强版
+文本索引 = LibE.神梦_智能填表.网页_是否就绪加强("张三|李四|王五", 0, 15)
+Select Case 文本索引
+    Case 1
+        TracePrint "找到【张三】"
+    Case 2
+        TracePrint "找到【李四】"
+    Case 3
+        TracePrint "找到【王五】"
+    Case Else
+        TracePrint "未找到！"
+End Select
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_刷新'></a>网页_刷新 
+</td></tr><tr><th>命令功能：</th><td>
+刷新当前页面<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.Refresh
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_刷新" class="vb" id="code8_网页_刷新">
+//刷新当前页面
+Call LibE.神梦_智能填表.网页_刷新()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_跳转'></a>网页_跳转 
+</td></tr><tr><th>命令功能：</th><td>
+打开地址，跳转到新的页面<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.Go
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，URL
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_跳转" class="vb" id="code8_网页_跳转">
+//跳转到新的页面
+Call LibE.神梦_智能填表.网页_跳转("https://www.神梦.com/")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_停止'></a>网页_停止 
+</td></tr><tr><th>命令功能：</th><td>
+停止加载页面
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+无
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_停止" class="vb" id="code8_网页_停止">
+//停止加载页面
+Call LibE.神梦_智能填表.网页_停止()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_预处理弹窗'></a>网页_预处理弹窗 
+</td></tr><tr><th>命令功能：</th><td>
+提前为即将弹出的窗口做准备
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，文本内容，向 Prompt 弹窗写入内容，其他类型弹窗留空
+参数2【必选】：文本型，点击按钮，true=确定；false=取消
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_预处理弹窗" class="vb" id="code8_网页_预处理弹窗">
+//获取弹窗内容
+Call LibE.神梦_智能填表.网页_预处理弹窗("", True)
+Call LibE.神梦_智能填表.网页_执行JS(0, "alert('嗨！你好！');")
+TracePrint "弹窗内容：" & LibE.神梦_智能填表.网页_取弹窗内容()
+
+//带是否按钮的弹窗
+Call LibE.神梦_智能填表.网页_预处理弹窗("神梦无痕", True)
+TracePrint "弹窗返回：" & LibE.神梦_智能填表.网页_执行JS(1, "return confirm('是否点击确定按钮？');")
+TracePrint "弹窗内容：" & LibE.神梦_智能填表.网页_取弹窗内容()
+
+//往弹窗里设置指定的内容
+Call LibE.神梦_智能填表.网页_预处理弹窗("神梦无痕", True)
+TracePrint "弹窗返回：" & LibE.神梦_智能填表.网页_执行JS(1, "return prompt('请输入您的名字：', '');")
+TracePrint "弹窗内容：" & LibE.神梦_智能填表.网页_取弹窗内容()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_执行JS'></a>网页_执行JS 
+</td></tr><tr><th>命令功能：</th><td>
+在当前网页中执行一段JS脚本<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.RunJS
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，执行类型；0表示执行js不带返回值，1表示执行js并返回返回值，需要js中有return语句
+参数2【必选】：文本型，网页元素特征字符串
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，执行结果
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_执行JS" class="vb" id="code8_网页_执行JS">
+'可以用 jQuery 来修改标题, 我内置集成了 jQuery 1.9.1
+Call LibE.神梦_智能填表.网页_执行JS(0, "$('title').html('按键精灵');")
+
+'利用JS语句返回网页标题，必须加 return 语句才有返回值
+title = LibE.神梦_智能填表.网页_执行JS(1, "var t=document.title;return t;")
+TracePrint title
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置Cookie'></a>网页_置Cookie 
+</td></tr><tr><th>命令功能：</th><td>
+设置当前页面Cookie
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，新Cookie
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置Cookie" class="vb" id="code8_网页_置Cookie">
+//设置当前页面Cookie
+新Cookie = "SMWH=神梦无痕"
+Call LibE.神梦_智能填表.网页_置Cookie(新Cookie)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置IE内核引擎'></a>网页_置IE内核引擎 
+</td></tr><tr><th>命令功能：</th><td>
+设置IE内核引擎，可以用第三方插件来作为本命令库的IE内核引擎
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，插件名（Web.dll=WQM浏览器引擎；WebBox.exe=外置浏览器引擎；WebOperation.dll=网页操作插件；DBSoft.dll=大兵插件）
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置IE内核引擎" class="vb" id="code8_网页_置IE内核引擎">
+//调用dll引擎，需要加上 Import 命令
+Import "Web.dll"
+Call Lib.神梦_智能填表.网页_置IE内核引擎("Web.dll")
+
+
+//调用外置浏览器引擎，就不需要，因为它不是dll
+Call Lib.神梦_智能填表.网页_置IE内核引擎("WebBox.exe")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置UserAgent'></a>网页_置UserAgent 
+</td></tr><tr><th>命令功能：</th><td>
+设置浏览器UserAgent，可以用于伪装成其他类型的浏览器
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】，文本型，新的UserAgent
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置UserAgent" class="vb" id="code8_网页_置UserAgent">
+//设置浏览器UserAgent
+UserAgent = _
+"Mozilla/5.0 (Windows NT 6.1; WOW64) "&_
+"AppleWebKit/534.50 (KHTML, like Gecko) "&_
+"Version/5.1 Safari/534.50"
+
+Call LibE.神梦_智能填表.网页_置UserAgent(UserAgent)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置编辑模式'></a>网页_置编辑模式 
+</td></tr><tr><th>命令功能：</th><td>
+设置当前网页是否可编辑
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：逻辑型，是否可编辑，(默认 true=转成编辑模式)；false=还原成浏览模式
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置编辑模式" class="vb" id="code8_网页_置编辑模式">
+//设置当前网页是可以编辑
+Call LibE.神梦_智能填表.网页_置编辑模式(True)
+
+
+//设置当前网页是不可编辑
+Call LibE.神梦_智能填表.网页_置编辑模式(False)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置代理IP'></a>网页_置代理IP 
+</td></tr><tr><th>命令功能：</th><td>
+设置浏览器代理IP
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，代理IP，格式：IP+冒号+端口
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置代理IP" class="vb" id="code8_网页_置代理IP">
+//设置IE代理IP
+Call LibE.神梦_智能填表.网页_置代理IP("127.0.0.1:80")
+
+//该命令不支持谷歌浏览器
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置滚动条偏移'></a>网页_置滚动条偏移 
+</td></tr><tr><th>命令功能：</th><td>
+控制浏览器滚动条上下滑动
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，水平滚动距离（像素，正数为下滚，负数为上滚）
+参数2【必选】：整数型，垂直滚动距离（像素，正数为下滚，负数为上滚）
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置滚动条偏移" class="vb" id="code8_网页_置滚动条偏移">
+//控制浏览器滚动条上下滑动
+Call LibE.神梦_智能填表.网页_置滚动条偏移(10, 10)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置滚动条位置'></a>网页_置滚动条位置 
+</td></tr><tr><th>命令功能：</th><td>
+当前网页滚动到指定位置<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.ScrollTo
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，水平滚条位置（像素）
+参数2【必选】：整数型，垂直滚条位置（像素）
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置滚动条位置" class="vb" id="code8_网页_置滚动条位置">
+//当前网页滚动到指定位置
+Call LibE.神梦_智能填表.网页_置滚动条位置(50, 50)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置浏览器大小'></a>网页_置浏览器大小 
+</td></tr><tr><th>命令功能：</th><td>
+设置浏览器窗口大小<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.SetSize
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口宽度（以像素为单位）
+参数2【必选】：整数型，窗口高度（以像素为单位）
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置浏览器大小" class="vb" id="code8_网页_置浏览器大小">
+//设置浏览器窗口大小
+Call LibE.神梦_智能填表.网页_置浏览器大小(800, 600)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置浏览器位置'></a>网页_置浏览器位置 
+</td></tr><tr><th>命令功能：</th><td>
+设置浏览器窗口位置
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，坐标X（以像素为单位）
+参数2【必选】：整数型，坐标Y（以像素为单位）
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置浏览器位置" class="vb" id="code8_网页_置浏览器位置">
+//设置浏览器窗口到屏幕左上角(0, 0)位置
+Call LibE.神梦_智能填表.网页_置浏览器位置(0, 0)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置页面打开方式'></a>网页_置页面打开方式 
+</td></tr><tr><th>命令功能：</th><td>
+设置当前网页的页面打开方式，只针对未设置过target属性的标签(链接或表单)生效
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，打开方式，0=本窗口打开；1=新窗口打开
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置页面打开方式" class="vb" id="code8_网页_置页面打开方式">
+//设置当前网页的页面在本窗口打开
+Call LibE.神梦_智能填表.网页_置页面打开方式(0)
+
+
+//设置当前网页的页面在新窗口打开
+Call LibE.神梦_智能填表.网页_置页面打开方式(1)
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置隐式等待'></a>网页_置隐式等待
+</td></tr><tr><th>命令功能：</th><td>
+设置隐式等待，可以避免多余的等待浪费时间
+内部会每隔 0.5 秒循环查找元素，找到则立即返回
+如果超过设置的时间还没有找到，就跳出内部循环
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，超时时间（单位秒）
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置隐式等待" class="vb" id="code8_网页_置隐式等待">
+// 不加隐式等待的话，就必须加上 Delay 强制等待
+'打开网址导航
+Call LibE.神梦_智能填表.网页_跳转("https://www.baidu.com/")
+Delay 2000  '强制等待 2 秒
+'输入“神梦填表”
+Call LibE.神梦_智能填表.元素_置输入框("神梦填表", "id:kw") 
+Delay 2000  '强制等待 2 秒
+'点击“百度一下”按钮
+Call LibE.神梦_智能填表.元素_点击("id:su")
+Delay 2000  '强制等待 2 秒
+
+
+
+//设置隐式等待 5 秒，只限当前线程生效
+Call LibE.神梦_智能填表.网页_置隐式等待(5)
+'打开网址导航
+Call LibE.神梦_智能填表.网页_跳转("https://www.baidu.com/")
+'输入“神梦填表”
+Call LibE.神梦_智能填表.元素_置输入框("神梦填表", "id:kw") 
+'点击“百度一下”按钮
+Call LibE.神梦_智能填表.元素_点击("id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='网页_置智能模式'></a>网页_置智能模式 
+</td></tr><tr><th>命令功能：</th><td>
+设置智能填表模式，关闭后速度明显提升，但是不支持自动遍历框架（可以用【框架_进入】），元素特征不支持 WQM 格式
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：逻辑型，是否开启，(默认 true=开启智能，新手专用)；false=关闭智能，提升运行速度，老手专用
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_网页_置智能模式" class="vb" id="code8_网页_置智能模式">
+授权码 = "0123456789ABCDEF"  '填入授权码
+
+//记得要先初始化命令库，才能用命令库中的功能
+If LibE.神梦_智能填表._初始化(授权码, "") = False  Then 
+    MsgBox "出错，智能填表初始化失败！", 1 + 16 + 4096, "警告！"
+    ExitScript 
+End If
+
+
+//启动IE浏览器
+If LibE.神梦_智能填表.绑定("IE.exe") Then 
+	
+    //关闭智能模式，可以提升运行速度，老手专用（默认是开启的，新手不建议关闭）
+    Call LibE.神梦_智能填表.网页_置智能模式(False)
+
+	
+    //打开百度
+    Call LibE.神梦_智能填表.网页_跳转("https://www.baidu.com/")
+    Call LibE.神梦_智能填表.网页_是否就绪(30) //关闭了智能模式后，每次跳转这句不能少
+    Delay 2000
+    
+    
+    //输入“按键精灵”
+    Call LibE.神梦_智能填表.元素_置输入框("按键精灵", "#kw") 
+    Delay 2000
+    
+    //点击“百度一下”按钮
+    Call LibE.神梦_智能填表.元素_点击("#su")
+    Delay 2000
+    
+    MsgBox "脚本执行完毕！", 1+64+4096, "百度一下"
+Else 
+    MsgBox "出错，绑定浏览器失败！", 1 + 16 + 4096, "警告！"
+    ExitScript 
+End If
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_点击'></a>元素_点击 
+</td></tr><tr><th>命令功能：</th><td>
+点击网页元素，点击网页中指定特征的按钮或链接，或者是其他元素<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.HtmlClick
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_点击" class="vb" id="code8_元素_点击">
+//点击网页元素
+Call LibE.神梦_智能填表.元素_点击("id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_滚动定位'></a>元素_滚动定位 
+</td></tr><tr><th>命令功能：</th><td>
+网页滚动到指定网页元素位置，使网页元素在视窗范围
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_滚动定位" class="vb" id="code8_元素_滚动定位">
+//网页滚动到指定网页元素位置
+Call LibE.神梦_智能填表.元素_滚动定位("id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_滑动'></a>元素_滑动 
+</td></tr><tr><th>命令功能：</th><td>
+网页元素滑动，触发元素的滑动事件
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，起点X坐标
+参数2【必选】：整数型，起点Y坐标
+参数3【必选】：整数型，终点X坐标
+参数4【必选】：整数型，终点Y坐标
+参数5【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_滑动" class="vb" id="code8_元素_滑动">
+//网页元素滑动
+Call LibE.神梦_智能填表.元素_滑动(0, 0, 100, 100, "id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_获得焦点'></a>元素_获得焦点 
+</td></tr><tr><th>命令功能：</th><td>
+给元素设置焦点
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_获得焦点" class="vb" id="code8_元素_获得焦点">
+//给元素设置焦点
+Call LibE.神梦_智能填表.元素_点击("id:kw")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_枚举'></a>元素_枚举 
+</td></tr><tr><th>命令功能：</th><td>
+枚举标记指定元素特征
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，枚举数量
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_枚举" class="vb" id="code8_元素_枚举">
+//枚举标记同名的txt特征
+元素特征 = "tag:A&txt:今日热点"
+Enums = LibE.神梦_智能填表.元素_枚举(元素特征)
+For i = 0 To Enums - 1
+    TracePrint "【"& i &"】：" & LibE.神梦_智能填表.元素_取属性值("outerHTML",  元素特征 & "&enum:" & i)
+Next
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取CSS选择器'></a>元素_取CSS选择器 
+</td></tr><tr><th>命令功能：</th><td>
+获取指定网页元素的 CSS 选择器
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，CSS选择器
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取CSS选择器" class="vb" id="code8_元素_取CSS选择器">
+//获取指定网页元素的 CSS 选择器
+TracePrint LibE.神梦_智能填表.元素_取CSS选择器("id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取WQM选择器'></a>元素_取WQM选择器 
+</td></tr><tr><th>命令功能：</th><td>
+获取指定网页元素的 WQM 选择器
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+文本型，WQM选择器
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取WQM选择器" class="vb" id="code8_元素_取WQM选择器">
+//获取指定网页元素的 WQM 选择器 ---- 输出 id:su
+返回值 = LibE.神梦_智能填表.元素_取WQM选择器("#su")
+TracePrint 返回值
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取XPath选择器'></a>元素_取XPath选择器 
+</td></tr><tr><th>命令功能：</th><td>
+获取指定网页元素的 XPath 路径
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，XPath路径
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取XPath选择器" class="vb" id="code8_元素_取XPath选择器">
+//获取指定网页元素的 XPath 路径
+TracePrint LibE.神梦_智能填表.元素_取XPath选择器("id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取表格'></a>元素_取表格 
+</td></tr><tr><th>命令功能：</th><td>
+获取网页中表格的指定单元格内容（表格标签名：TABLE）
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，表单元，表头=tHead；表主=tBody[索引]（索引从0开始）；表尾=tFoot
+参数2【必选】：文本型，行（从0开始）
+参数3【必选】：文本型，列（从0开始）
+参数5【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，单元格内容
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取表格" class="vb" id="code8_元素_取表格">
+//获取网页中表格的指定单元格内容
+TracePrint LibE.神梦_智能填表.元素_取表格("", 0, 0, "tag:table&index:0")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取表格表总数'></a>元素_取表格表总数 
+</td></tr><tr><th>命令功能：</th><td>
+获取网页中表格的表总数
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+数值型，表总数
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取表格表总数" class="vb" id="code8_元素_取表格表总数">
+//遍历表格内容
+表总数 = LibE.神梦_智能填表.元素_取表格表总数("tag:table&index:0")
+For 表 = 0 To 表总数 - 1
+    行总数 = LibE.神梦_智能填表.元素_取表格行总数(表, "tag:table&index:0")
+    For 行 = 0 To 行总数 - 1
+        列总数 = LibE.神梦_智能填表.元素_取表格列总数(表, 行, "tag:table&index:0")
+        For 列 = 0 To 列总数 - 1
+            TracePrint "Table"& 表 &"("& 行 & "," & 列 &") = " & LibE.神梦_智能填表.元素_取表格(表, 行, 列, "tag:table&index:0")
+        Next 
+    Next 
+Next
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取表格列总数'></a>元素_取表格列总数 
+</td></tr><tr><th>命令功能：</th><td>
+获取网页中表格的列总数
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，表单元，表头=tHead（用“^”表示）；表主=tBody[索引]（索引从0开始）；表尾=tFoot（用“$”表示）
+参数2【必选】：数值型，行（从0开始）
+参数3【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+数值型，列总数
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取表格列总数" class="vb" id="code8_元素_取表格列总数">
+//遍历表格内容
+表总数 = LibE.神梦_智能填表.元素_取表格表总数("tag:table&index:0")
+For 表 = 0 To 表总数 - 1
+    行总数 = LibE.神梦_智能填表.元素_取表格行总数(表, "tag:table&index:0")
+    For 行 = 0 To 行总数 - 1
+        列总数 = LibE.神梦_智能填表.元素_取表格列总数(表, 行, "tag:table&index:0")
+        For 列 = 0 To 列总数 - 1
+            TracePrint "Table"& 表 &"("& 行 & "," & 列 &") = " & LibE.神梦_智能填表.元素_取表格(表, 行, 列, "tag:table&index:0")
+        Next 
+    Next 
+Next
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取表格行总数'></a>元素_取表格行总数 
+</td></tr><tr><th>命令功能：</th><td>
+获取网页中表格的行总数
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，表单元，表头=tHead（用“^”表示）；表主=tBody[索引]（索引从0开始）；表尾=tFoot（用“$”表示）
+参数2【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+数值型，行总数
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取表格行总数" class="vb" id="code8_元素_取表格行总数">
+//遍历表格内容
+表总数 = LibE.神梦_智能填表.元素_取表格表总数("tag:table&index:0")
+For 表 = 0 To 表总数 - 1
+    行总数 = LibE.神梦_智能填表.元素_取表格行总数(表, "tag:table&index:0")
+    For 行 = 0 To 行总数 - 1
+        列总数 = LibE.神梦_智能填表.元素_取表格列总数(表, 行, "tag:table&index:0")
+        For 列 = 0 To 列总数 - 1
+            TracePrint "Table"& 表 &"("& 行 & "," & 列 &") = " & LibE.神梦_智能填表.元素_取表格(表, 行, 列, "tag:table&index:0")
+        Next 
+    Next 
+Next
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取对话框'></a>元素_取对话框 
+</td></tr><tr><th>命令功能：</th><td>
+获取对话框静态文本<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.GetDialogContent
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取对话框" class="vb" id="code8_元素_取对话框">
+//该命令已过时，请使用以下命令：
+
+//获取弹窗内容
+Call LibE.神梦_智能填表.网页_预处理弹窗("", True)
+Call LibE.神梦_智能填表.网页_执行JS(0, "alert('嗨！你好！');")
+TracePrint "弹窗内容：" & LibE.神梦_智能填表.网页_取弹窗内容()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取列表框'></a>元素_取列表框 
+</td></tr><tr><th>命令功能：</th><td>
+获取网页中的列表指定索引内容（列表标签名：UL、OL、DL）
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：数值型，列表索引（从0开始）
+参数2【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+文本型，指定索引内容
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取列表框" class="vb" id="code8_元素_取列表框">
+总行数 = LibE.神梦_智能填表.元素_取列表总数("tag:UL&index:0")
+For i = 0 To 总行数 - 1
+    TracePrint LibE.神梦_智能填表.元素_取列表框(i, "tag:UL&index:0")
+Next
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取列表总数'></a>元素_取列表总数 
+</td></tr><tr><th>命令功能：</th><td>
+获取网页中的列表总行数（列表标签名：UL、OL、DL）
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+数值型，列表总行数
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取列表总数" class="vb" id="code8_元素_取列表总数">
+总行数 = LibE.神梦_智能填表.元素_取列表总数("tag:UL&index:0")
+For i = 0 To 总行数 - 1
+    TracePrint LibE.神梦_智能填表.元素_取列表框(i, "tag:UL&index:0")
+Next
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取是否显示'></a>元素_取是否显示 
+</td></tr><tr><th>命令功能：</th><td>
+判断网页元素是否显示
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否显示
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取是否显示" class="vb" id="code8_元素_取是否显示">
+//判断网页元素是否显示
+是否显示 = LibE.神梦_智能填表.元素_取是否显示("id:su")
+If 是否显示 Then 
+    TracePrint "网页元素可见"
+Else 
+    TracePrint "网页元素隐藏"
+End If
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取是否有效'></a>元素_取是否有效 
+</td></tr><tr><th>命令功能：</th><td>
+判断网页元素是否有效
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否有效
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取是否有效" class="vb" id="code8_元素_取是否有效">
+//判断网页元素是否有效
+是否有效 = LibE.神梦_智能填表.元素_取是否有效("id:su")
+If 是否有效 Then 
+    TracePrint "网页元素可以点击"
+Else 
+    TracePrint "网页元素已被禁用"
+End If
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取图片'></a>元素_取图片 
+</td></tr><tr><th>命令功能：</th><td>
+保存网页里的图片
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，保存图片
+参数2【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取图片" class="vb" id="code8_元素_取图片">
+//保存网页里的图片 
+返回值 = LibE.神梦_智能填表.元素_取图片("C:\保存图片.jpg", "tag:img&index:0")
+If 返回值 Then 
+    TracePrint "保存图片成功！"
+Else 
+    TracePrint "保存图片失败。。。"
+End If
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取下拉框'></a>元素_取下拉框 
+</td></tr><tr><th>命令功能：</th><td>
+获取网页中的指定下拉框索引内容
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，下拉框索引（从0开始）
+参数2【必选】：文本型，网页元素特征字符串
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+文本型，指定下拉框索引内容
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取下拉框" class="vb" id="code8_元素_取下拉框">
+//获取网页中的指定下拉框索引内容
+总项数 = LibE.神梦_智能填表.元素_取下拉总数("id:mySelect")
+For index = 0 To 总项数 - 1
+    返回值 = LibE.神梦_智能填表.元素_取下拉框(index, "id:mySelect")
+    TracePrint "【下拉框索引 "& index &" 的内容】：" & 返回值
+Next
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取下拉索引'></a>元素_取下拉索引 
+</td></tr><tr><th>命令功能：</th><td>
+获取网页中的下拉框选中项索引
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+整数型，选中项索引（从0开始）
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取下拉索引" class="vb" id="code8_元素_取下拉索引">
+//获取网页中的下拉框选中项索引
+index = LibE.神梦_智能填表.元素_取下拉索引("id:mySelect")
+TracePrint "【选中项索引】：" & index
+
+//获取网页中的下拉框选中项内容
+返回值 = LibE.神梦_智能填表.元素_取下拉框(index, "id:mySelect")
+TracePrint "【选中项内容】：" & 返回值
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取下拉总数'></a>元素_取下拉总数 
+</td></tr><tr><th>命令功能：</th><td>
+获取网页中的下拉框项总数
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+整数型，项总数
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取下拉总数" class="vb" id="code8_元素_取下拉总数">
+//获取网页中的下拉框项总数
+总项数 = LibE.神梦_智能填表.元素_取下拉总数("id:mySelect")
+For index = 0 To 总项数 - 1
+    返回值 = LibE.神梦_智能填表.元素_取下拉框(index, "id:mySelect")
+    TracePrint "【下拉框索引 "& index &" 的内容】：" & 返回值
+Next
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取属性值'></a>元素_取属性值 
+</td></tr><tr><th>命令功能：</th><td>
+获取网页元素指定属性的信息<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.HtmlGet
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：字符串，网页元素属性类型：
+         类型：text，网页元素的内部文本
+               html，网页元素的内部HTML
+          outerHtml，网页元素的外部HTML
+              value，表单元素的value值
+                src，图片元素的图片地址
+               href，链接元素的链接地址
+              class，网页元素的CSS类名称
+             offset，网页元素的左上角位置（x|y）
+       table[通配符](行,列)，表格元素里的内容，表、行、列是以 0 开始的
+       通配符：^，表示对＜thead＞元素的引用，例：table^(0,0)
+               $，表示对＜tfoot＞元素的引用，例：table$(0,0)
+            数字，表示对＜tbody＞元素的引用，例：table0(0,0)
+参数2【必选】：字符串，网页元素特征字符串<a name="元素_取属性值_元素特征"></a>
+                元素特征支持三种格式：
+                【WQM  格式】：特征名:特征值&特征名:特征值&特征名:特征值
+                【XPath格式】：//*[@特征名='特征值'][@特征名='特征值']
+                                带框架：框架索引>>XPath选择器
+                              （通过谷歌内核浏览器获取定位路径，按 F12，选中元素，右键 -> Copy -> Copy XPath，就复制到剪切板了。
+                                复制到的路径里有双引号，必须全部改成单引号才行）
+                【CSS  格式】：*[特征名='特征值'][特征名='特征值']
+                                带框架：框架索引>>CSS选择器
+                              （通过谷歌内核浏览器获取定位路径，按 F12，选中元素，右键 -> Copy -> Copy selector，就复制到剪切板了。
+                                复制到的路径里有双引号，必须全部改成单引号才行）
+                                
+                    特征名：id，匹配元素唯一标识，可以直接定位
+                           tag，匹配元素的标签
+                         index，匹配元素的索引，一般在指定特征时无法唯一定位元素时使用，从0开始计算
+                          name，匹配元素的name属性
+                          type，（支持通配符）匹配元素的type属性
+                         value，（支持通配符）匹配元素的value属性，一般用来匹配提交按钮
+                           txt，（支持通配符）匹配元素的innerText，一般用来操作链接
+                           src，（支持通配符）用于图片元素的匹配，匹配 img 标签的 
+                          href，（支持通配符）用于匹配链接的href属性
+                         class，（支持通配符）用于匹配元素的CSS类名称
+                         frame，框架元素（frame/iframe），frame支持索引匹配和文本匹配，支持嵌套框架索引【frame:0>1>2】
+                        通配符：*，表示为特定字符串，  例：value*:一下【匹配所有出现“一下”文字的元素】
+                                ^，表示为以某字符开始，例：value^:百度【匹配所有以“百度”文字开始的元素】
+                                $，表示以某字符结尾，  例：value$:知道【匹配所有以“知道”文字结尾的元素】
+
+                    特征值：【特征值包含 ":&" 需要先进行转义。 ":" 转为 %3A， "&" 转为 %26】
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，元素属性值
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取属性值" class="vb" id="code8_元素_取属性值">
+//获取网页元素的信息，取网页元素指定属性的信息
+TracePrint LibE.神梦_智能填表.元素_取属性值("value", "id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_取坐标'></a>元素_取坐标 
+</td></tr><tr><th>命令功能：</th><td>
+查找元素在浏览器窗口的后台坐标位置
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：文本型，元素后台坐标 X|Y
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_取坐标" class="vb" id="code8_元素_取坐标">
+//查找元素在浏览器窗口的坐标位置
+返回值 = LibE.神梦_智能填表.元素_取坐标("id:su")
+XY = Split(返回值, "|")
+intX = XY(0)
+intY = XY(1)
+TracePrint "后台X坐标：" & intX
+TracePrint "后台Y坐标：" & intY
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_上传文件'></a>元素_上传文件 
+</td></tr><tr><th>命令功能：</th><td>
+自动点击选择文件按钮，上传文件
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，文件路径，多个用“|”分割
+参数2【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_上传文件" class="vb" id="code8_元素_上传文件">
+//自动点击选择文件按钮，上传文件
+Call LibE.神梦_智能填表.元素_上传文件("C:\1.png|C:\2.png", "tag:input&type:file")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_失去焦点'></a>元素_失去焦点 
+</td></tr><tr><th>命令功能：</th><td>
+从元素上移开焦点
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_失去焦点" class="vb" id="code8_元素_失去焦点">
+//从元素上移开焦点
+Call LibE.神梦_智能填表.元素_失去焦点("id:kw")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_是否存在'></a>元素_是否存在 
+</td></tr><tr><th>命令功能：</th><td>
+判断网页元素是否存在<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.HtmlExists
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：整数型，匹配数量
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_是否存在" class="vb" id="code8_元素_是否存在">
+//判断网页元素是否存在
+是否存在 = LibE.神梦_智能填表.元素_是否存在("id:su")
+If 是否存在 Then 
+    TracePrint "找到 "& 是否存在 &" 个匹配项！"
+Else 
+    TracePrint "未找到！"
+End If
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_鼠标按下'></a>元素_鼠标按下 
+</td></tr><tr><th>命令功能：</th><td>
+网页元素上鼠标按下，触发元素的鼠标按下事件
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标
+参数2【必选】：整数型，窗口Y坐标
+参数3【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_鼠标按下" class="vb" id="code8_元素_鼠标按下">
+//网页元素上鼠标按下
+Call LibE.神梦_智能填表.元素_鼠标按下(100,100,"id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_鼠标弹起'></a>元素_鼠标弹起 
+</td></tr><tr><th>命令功能：</th><td>
+网页元素上鼠标弹起，触发元素的鼠标弹起事件
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标
+参数2【必选】：整数型，窗口Y坐标
+参数3【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_鼠标弹起" class="vb" id="code8_元素_鼠标弹起">
+//网页元素上鼠标弹起
+Call LibE.神梦_智能填表.元素_鼠标弹起(100,100,"id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_鼠标点击'></a>元素_鼠标点击 
+</td></tr><tr><th>命令功能：</th><td>
+网页元素上鼠标点击，触发元素的鼠标点击事件
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标
+参数2【必选】：整数型，窗口Y坐标
+参数3【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_鼠标点击" class="vb" id="code8_元素_鼠标点击">
+//网页元素上鼠标点击
+Call LibE.神梦_智能填表.元素_鼠标点击(100,100,"id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_鼠标移动'></a>元素_鼠标移动 
+</td></tr><tr><th>命令功能：</th><td>
+网页元素上鼠标移动，触发元素的鼠标移动事件
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：整数型，窗口X坐标
+参数2【必选】：整数型，窗口Y坐标
+参数3【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_鼠标移动" class="vb" id="code8_元素_鼠标移动">
+//网页元素上鼠标移动
+Call LibE.神梦_智能填表.元素_鼠标移动(100,100,"id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_悬停'></a>元素_悬停 
+</td></tr><tr><th>命令功能：</th><td>
+网页元素悬停，触发元素的悬停事件
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_悬停" class="vb" id="code8_元素_悬停">
+//网页元素悬停
+Call LibE.神梦_智能填表.元素_悬停 ("id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_执行事件'></a>元素_执行事件 
+</td></tr><tr><th>命令功能：</th><td>
+执行某个网页元素相关事件方法
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】，文本型，事件名称
+    事件名称   事件描述
+    abort     图像的加载被中断。
+    blur      元素失去焦点。
+    change    域的内容被改变。
+    click     当用户点击某个对象时调用的事件句柄。
+    dblclick  当用户双击某个对象时调用的事件句柄。
+    error     在加载文档或图像时发生错误。
+    focus     元素获得焦点。
+    keydown   某个键盘按键被按下。
+    keypress  某个键盘按键被按下并松开。
+    keyup     某个键盘按键被松开。
+    load      一张页面或一幅图像完成加载。
+    mousedown 鼠标按钮被按下。
+    mousemove 鼠标被移动。
+    mouseout  鼠标从某元素移开。
+    mouseover 鼠标移到某元素之上。
+    mouseup   鼠标按键被松开。
+    reset     重置按钮被点击。
+    resize    窗口或框架被重新调整大小。
+    select    文本被选中。
+    submit    确认按钮被点击。
+    unload    用户退出页面。
+参数2【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_执行事件" class="vb" id="code8_元素_执行事件">
+//执行某个网页元素相关事件方法
+Call LibE.神梦_智能填表.元素_执行事件("click", "id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_置边框'></a>元素_置边框 
+</td></tr><tr><th>命令功能：</th><td>
+设置网页元素边框
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：逻辑型，True=加边框；False=还原
+参数2【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_置边框" class="vb" id="code8_元素_置边框">
+//添加网页元素边框
+Call LibE.神梦_智能填表.元素_置边框(True, "tag:a&index:0")
+
+//取消网页元素边框
+Call LibE.神梦_智能填表.元素_置边框(False, "tag:a&index:0")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_置表格'></a>元素_置表格 
+</td></tr><tr><th>命令功能：</th><td>
+操作网页中的表格，向表格指定单元格写入内容（表格标签名：TABLE）
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，表单元，表头=tHead；表主=tBody[索引]（索引从0开始）；表尾=tFoot
+参数2【必选】：文本型，行（从0开始）
+参数3【必选】：文本型，列（从0开始）
+参数4【必选】：文本型，文本内容
+参数5【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_置表格" class="vb" id="code8_元素_置表格">
+//操作网页中的表格，向表格指定单元格写入内容
+Call LibE.神梦_智能填表.元素_置表格("", 0, 0, "内容", "tag:table&index:0")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_置单复选框'></a>元素_置单复选框 
+</td></tr><tr><th>命令功能：</th><td>
+选择/清除网页中的单选框或复选框<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.HtmlCheck
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：逻辑型，True代表选中，False代表清除
+参数2【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_置单复选框" class="vb" id="code8_元素_置单复选框">
+//选择/清除网页中的单选框或复选框
+Call LibE.神梦_智能填表.元素_置单复选框(True, "tag:input&type:checkbox")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_置对话框'></a>元素_置对话框 
+</td></tr><tr><th>命令功能：</th><td>
+往对话框里输入文本内容
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，文本内容，向 Prompt 弹出的对话框写入内容
+参数2【必选】：逻辑型，点击按钮，true=确定；false=取消
+参数3【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_置对话框" class="vb" id="code8_元素_置对话框">
+//该命令已过时，请使用以下命令：
+
+//往弹窗里设置指定的内容
+Call LibE.神梦_智能填表.网页_预处理弹窗("神梦无痕", True)
+TracePrint "弹窗返回：" & LibE.神梦_智能填表.网页_执行JS(1, "return prompt('请输入您的名字：', '');")
+TracePrint "弹窗内容：" & LibE.神梦_智能填表.网页_取弹窗内容()
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_置是否显示'></a>元素_置是否显示 
+</td></tr><tr><th>命令功能：</th><td>
+设置网页元素是否显示
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：逻辑型，是否显示
+参数2【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_置是否显示" class="vb" id="code8_元素_置是否显示">
+//设置网页元素可见
+Call LibE.神梦_智能填表.元素_置是否显示(True, "id:su")
+
+//设置网页元素隐藏
+Call LibE.神梦_智能填表.元素_置是否显示(False, "id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_置是否有效'></a>元素_置是否有效 
+</td></tr><tr><th>命令功能：</th><td>
+设置网页元素是否有效
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：逻辑型，是否有效（有效：元素正常可以点击、输入；无效：元素被禁用无法点击、输入）
+参数2【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_置是否有效" class="vb" id="code8_元素_置是否有效">
+//设置网页元素有效
+Call LibE.神梦_智能填表.元素_置是否有效(True, "id:su")
+
+//禁止网页元素
+Call LibE.神梦_智能填表.元素_置是否有效(False, "id:su")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_置输入框'></a>元素_置输入框 
+</td></tr><tr><th>命令功能：</th><td>
+往文本框中输入文字，向网页中指定特征的文本框输入内容<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.HtmlInput
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，文本内容
+参数2【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_置输入框" class="vb" id="code8_元素_置输入框">
+//往文本框中输入文字
+Call LibE.神梦_智能填表.元素_置输入框("神梦无痕", "id:kw")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_置下拉框'></a>元素_置下拉框 
+</td></tr><tr><th>命令功能：</th><td>
+选择网页中的下拉框，支持多选<br><br><B>WQM命令</B>： <span class='blue'>Plugin</span>.<span class='blue'>Web</span>.HtmlSelect
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，需要选中的下拉选项的值，多个请用%号分开
+参数2【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_置下拉框" class="vb" id="code8_元素_置下拉框">
+//选择网页中的下拉框
+Call LibE.神梦_智能填表.元素_置下拉框(1, "tag:Select&index:0")
+</td></tr></table>	
+	
+	
+
+
+<table width='100%' border='0' cellpadding='0' cellspacing='1' class='ts'>
+<tr><th width='100px'>命令名称：</th><td class='name'>
+<a name='元素_置属性值'></a>元素_置属性值 
+</td></tr><tr><th>命令功能：</th><td>
+设置网页元素指定属性的值
+</td></tr><tr><th>命令参数：</th><td class='canshu'><pre>
+参数1【必选】：文本型，网页元素属性名
+       属性名：text，网页元素的内部文本
+               html，网页元素的内部HTML
+          outerHtml，网页元素的外部HTML
+              value，表单元素的value值
+                src，图片元素的图片地址
+               href，链接元素的链接地址
+              class，网页元素的CSS类名称
+             offset，网页元素的左上角位置（x|y）
+       table[通配符](行,列)，表格元素里的内容，表、行、列是以 0 开始的
+       通配符：^，表示对＜thead＞元素的引用，例：table^(0,0)
+               $，表示对＜tfoot＞元素的引用，例：table$(0,0)
+            数字，表示对＜tbody＞元素的引用，例：table0(0,0)
+参数2【必选】：文本型，网页元素属性值
+参数3【必选】：文本型，网页元素特征字符串
+   详情请查看：<a href="#元素_取属性值_元素特征">元素_取属性值</a>
+</td></tr><tr><th>返回值：</th><td class='fanhui'>
+返回值：逻辑型，是否成功
+</td></tr><tr><th><span class='red'>脚本例子：</span>
+</th><td class='lizi'><pre name="code8_元素_置属性值" class="vb" id="code8_元素_置属性值">
+//设置网页元素指定属性的值
+Call LibE.神梦_智能填表.元素_置属性值("value", "百度两下", "id:su")
+</td></tr></table>	
+	
+	
+
+
+<script type="text/javascript">
+    dp.sh.Brushes.Vb = function()
+    { 
+        var keywords = 'vbBlack vbRed vbGreen vbYellow vbBlue vbMagenta vbCyan vbWhite vbBinaryCompare vbTextCompare vbSunday vbMonday vbTuesday vbWednesday ' + 
+        'vbThursday vbFriday vbSaturday vbUseSystemDayOfWeek vbFirstJan1 vbFirstFourDays vbFirstFullWeek vbGeneralDate vbLongDate vbShortDate vbLongTime ' + 
+        'vbShortTime vbObjectError vbOKOnly vbOKCancel vbAbortRetryIgnore vbYesNoCancel vbYesNo vbRetryCancel vbCritical vbQuestion vbExclamation vbInformation ' + 
+        'vbDefaultButton1 vbDefaultButton2 vbDefaultButton3 vbDefaultButton4 vbApplicationModal vbSystemModal vbOK vbCancel vbAbort vbRetry vbIgnore vbYes vbNo '+
+        'vbCr vbCrLf vbFormFeed vbLf vbNewLine vbNullChar vbNullString vbTab vbVerticalTab vbUseDefault vbTrue vbFalse vbEmpty vbNull vbInteger vbLong vbSingle '+
+        'vbDouble vbCurrency vbDate vbString vbObject vbError vbBoolean vbVariant vbDataObject vbDecimal vbByte vbArray WScript '+
+        'And As Boolean ByRef Byte ByVal Call Case Const Currency Debug Dim Do Double Each Else ElseIf Empty End EndIf Enum Eqv Event Exit Explicit False For '+ 
+        'Function Get Goto If Imp Implements In Integer Is Let Like Long Loop LSet Me Mod New Next Not Nothing Null On Option Optional Or ParamArray Preserve '+
+        'Private Property Public RaiseEvent ReDim Rem Resume RSet Select Set Shared Single Static Stop Sub Then To True Type TypeOf Until Variant Wend While With '+
+        'Xor IfColor Import UserVar SetSimMode Global EndScript ExitScript RestartScript Delay VBSBegin VBSEnd Lib LibE Alias Declare Plugin ' +
+        'Abs Array Asc Atn CBool CByte CCur CDate CDbl CInt CLng CSng CStr Chr Cos CreateObject Date DateAdd DateDiff DatePart DateSerial DateValue Day Escape '+
+        'Eval Exp Filter Fix FormatCurrency FormatDateTime FormatNumber FormatPercent GetLocale GetObject GetRef Hex Hour InStr InStrRev InputBox Int IsArray '+
+        'IsDate IsEmpty IsNull IsNumeric IsObject Join LBound LCase LTrim Left Len LoadPicture Log Mid Minute Month MonthName MsgBox Now Oct Randomize RGB RTrim '+
+        'Replace Right Rnd Round ScriptEngine ScriptEngineBuildVersion ScriptEngineMajorVersion ScriptEngineMinorVersion Second SetLocale Sgn Sin Space Split Sqr '+
+        'StrComp StrReverse String Tan Time TimeSerial TimeValue Timer Trim TypeName UBound UCase Unescape VarType Weekday WeekdayName Year KeyGroup KeyPress '+
+        'KeyPressH KeyPressS KeyDown KeyDownH KeyDownS KeyUp KeyUpH KeyUpS WaitKey GetLastKey LeftClick LeftClickH LeftClickS LeftDoubleClick LeftDoubleClickH '+
+        'LeftDoubleClickS LeftDown LeftDownH LeftDownS LeftUp LeftUpH LeftUpS RightClick RightClickH RightClickS RightDown RightDownH RightDownS RightUp '+
+        'RightUpH RightUpS MiddleClick MiddleClickH MiddleClickS MoveTo MoveToH MoveToS MoveR MoveRH MoveRS MouseWheel SaveMousePos RestoreMousePos LockMouse '+
+        'UnlockMouse WaitClick GetLastClick GetCursorPos GetCursorShape GetPixelColor FindColor FindColorEx FindCenterColor FindPic GetMacroID SayString '+
+        'MessageBox RunApp PutAttachment TracePrint LogStart LogStop BeginThread StopThread PauseThread ContinueThread GetThreadID SetEnv GetEnv Beep Execute '+
+        'GetExeDir GetScreenResolution ExecuteGlobal QMLibrary QUIMethodObj '+
+        'Bkgnd BkgndColor Color Console Encrypt File GetSysInfo Media Memory Msg Net Office Pic Sys SysEx Web Window sm SMWH SmIE SmADO SmSQL SmVM SmWeb SmReg SmOCR Access Oracle SQLServer MySql SGuoBrowser';
+        this.regexList = [
+            { regex: new RegExp('(//|\').*$', 'gm'), css: 'comment' }, 
+            { regex: new RegExp('/\\*([\\s\\S]*?)\\*/', 'gm'), css: 'comments' },
+            { regex: dp.sh.RegexLib.DoubleQuotedString, css: 'string' }, 
+            { regex: new RegExp('\\b\\d+\\b', 'gm'), css: 'composed' }, 
+            { regex: new RegExp(this.GetKeywords('dm'), 'gm'), css: 'preprocessor' }, 
+            { regex: new RegExp(this.GetKeywords(keywords), 'gm'), css: 'keyword'}
+        ]; 
+        this.CssClass = 'dp-vb'; 
+    }
+    dp.sh.Brushes.Vb.prototype = new dp.sh.Highlighter(); dp.sh.Brushes.Vb.Aliases = ['vb', 'vb.net'];
+    dp.SyntaxHighlighter.HighlightAll('code8__初始化',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8__销毁',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_绑定',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_绑定多开',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_创建浏览器',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_访问网页',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_关闭浏览器',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_键盘_按下',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_键盘_弹起',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_键盘_点击',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_键盘_输入文本',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_键盘_组合键',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_接码_短信登录',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_接码_短信发送',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_接码_短信加黑',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_接码_短信接收',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_接码_短信取号',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_接码_短信释放',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_接码_短信退出',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_接码_图形报错',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_接码_图形登录',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_接码_图形验证',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_框架_进入',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_框架_枚举',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_框架_退出',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_清除Cookie',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_清除历史记录',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_清除临时文件',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_取浏览器句柄',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_取外网IP',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_取网络时间',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_鼠标_滚轮滚动',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_鼠标_移动',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_鼠标_左键按下',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_鼠标_左键弹起',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_鼠标_左键点击',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_鼠标_左键双击',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_图色_比色',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_图色_取色',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_图色_找色',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_图色_找图',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_保存页面',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_标签关闭',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_标签切换',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_标签新建',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_高亮关键字',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_后退',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_截图',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_禁止弹窗',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_禁止警报',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_禁止未响应窗口',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_枚举元素',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_前进',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_取Cookie',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_取IE句柄',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_取UserAgent',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_取编码',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_取标题',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_取弹窗内容',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_取滚动条位置',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_取浏览器大小',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_取浏览器位置',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_取网址',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_取源码',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_是否就绪',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_是否就绪加强',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_刷新',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_跳转',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_停止',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_预处理弹窗',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_执行JS',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置Cookie',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置IE内核引擎',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置UserAgent',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置编辑模式',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置代理IP',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置滚动条偏移',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置滚动条位置',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置浏览器大小',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置浏览器位置',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置页面打开方式',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置隐式等待',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_网页_置智能模式',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_点击',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_滚动定位',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_滑动',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_获得焦点',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_枚举',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取CSS选择器',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取WQM选择器',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取XPath选择器',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取表格',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取表格表总数',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取表格列总数',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取表格行总数',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取对话框',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取列表框',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取列表总数',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取是否显示',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取是否有效',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取图片',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取下拉框',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取下拉索引',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取下拉总数',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取属性值',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_取坐标',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_上传文件',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_失去焦点',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_是否存在',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_鼠标按下',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_鼠标弹起',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_鼠标点击',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_鼠标移动',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_悬停',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_执行事件',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_置边框',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_置表格',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_置单复选框',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_置对话框',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_置是否显示',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_置是否有效',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_置输入框',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_置下拉框',true,true,false);
+    dp.SyntaxHighlighter.HighlightAll('code8_元素_置属性值',true,true,false);
+
+</script>
+</body>
+</html>	
+

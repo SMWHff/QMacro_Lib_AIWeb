@@ -1,0 +1,12 @@
+//授权后的小精灵无法保存QUI界面配置，需要加上如下代码
+
+'加载配置文件
+Event Form1.Load
+    Call Plugin.File.CopyFile("C:\uservar.ini", GetExeDir() & "uservar.ini" )
+End Event
+
+'保存配置文件
+Event Form1.UnLoad
+    Form1.SaveSetting : Delay 1000
+    Call Plugin.File.CopyFile(GetExeDir() & "uservar.ini", "C:\uservar.ini")
+End Event
